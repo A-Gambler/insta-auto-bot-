@@ -1,0 +1,123 @@
+<form class="form-horizontal" autocomplete="off" #createRoleForm="ngForm" name="forms">
+  <div class="modal-body">
+    <tabset #staticTabs>
+      <tab [heading]="'Configuration' | localize" class="pt-3 px-2">
+         
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="postsIntervalInHours">
+            Posts interval
+          </label>
+          <div class="col-md-2">
+            <input type="text" class="form-control input-size" name="postNumbers" id="postNumbers" required
+              maxlength="20" [(ngModel)]="InstaSettingUpdateInputDto.postNumbers"
+              onkeypress="return /^[0-9 ()]+$/i.test(event.key)" #postNumbers="ngModel" #postNumbersEl />
+            <abp-validation-summary [control]="postNumbers" [controlEl]="postNumbersEl">
+            </abp-validation-summary>
+          </div>
+          <div class="col-md-1"> posts</div>
+          <div class="col-md-2">
+            <input type="text" class="form-control input-size" name="postIntervalValue" id="postIntervalValue" required
+              maxlength="20" [(ngModel)]="InstaSettingUpdateInputDto.postIntervalValue"
+              onkeypress="return /^[0-9 ()]+$/i.test(event.key)" #postIntervalValue="ngModel" #postIntervalValueEl />
+            <abp-validation-summary [control]="postIntervalValue" [controlEl]="postIntervalValueEl">
+            </abp-validation-summary>
+          </div>
+          <div class="col-md-1"> times</div>
+          <div class="col-md-3">
+            <p-dropdown [options]="times" required placeholder="Select Time"
+              [(ngModel)]="InstaSettingUpdateInputDto.postInterval" optionLabel="name" name="selectedPostsTimeFor">
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="form-group row mb-0">
+          <label class="col-md-3 col-form-label" for="description">
+            Stories interval </label>
+          <div class="col-md-2">
+            <input type="text" class="form-control input-size" name="storyNumbers" id="storyNumbers" required
+              maxlength="20" [(ngModel)]="InstaSettingUpdateInputDto.storyNumbers"
+              onkeypress="return /^[0-9 ()]+$/i.test(event.key)" #storyNumbers="ngModel" #storyNumbersEl />
+            <abp-validation-summary [control]="storyNumbers" [controlEl]="storyNumbersEl">
+            </abp-validation-summary>
+          </div>
+          <div class="col-md-1"> stories</div>
+          <div class="col-md-2">
+            <input type="text" class="form-control input-size" name="storyIntervalValue" id="storyIntervalValue"
+              required maxlength="20" [(ngModel)]="InstaSettingUpdateInputDto.storyIntervalValue"
+              onkeypress="return /^[0-9 ()]+$/i.test(event.key)" #storyIntervalHour="ngModel" #storyIntervalValueEl />
+            <abp-validation-summary [control]="storyIntervalHour" [controlEl]="storyIntervalValueEl">
+            </abp-validation-summary>
+          </div>
+          <div class="col-md-1"> times</div>
+          <div class="col-md-3">
+            <p-dropdown [options]="times" required placeholder="Select Time"
+              [(ngModel)]="InstaSettingUpdateInputDto.storyInterval" optionLabel="name" name="storyInterval">
+            </p-dropdown>
+          </div>
+        </div>
+
+      </tab>
+      <tab [heading]="'Message Template' | localize" class="pt-3 px-2">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="description">
+            Message interval </label>
+          <div class="col-md-2">
+            <input type="text" class="form-control input-size" name="messageNumbers" id="messageNumbers" required
+              maxlength="20" [(ngModel)]="InstaSettingUpdateInputDto.messageNumbers"
+              onkeypress="return /^[0-9 ()]+$/i.test(event.key)" #messageNumbers="ngModel" #messageNumbersEl />
+            <abp-validation-summary [control]="messageNumbers" [controlEl]="messageNumbersEl">
+            </abp-validation-summary>
+          </div>
+          <div class="col-md-1"> Messages</div>
+          <div class="col-md-2">
+            <input type="text" class="form-control input-size" name="messageIntervalInHours" id="messageIntervalInHours"
+              required maxlength="20" [(ngModel)]="InstaSettingUpdateInputDto.messageIntervalValue"
+              onkeypress="return /^[0-9 ()]+$/i.test(event.key)" #messageIntervalValueHour="ngModel"
+              #messageIntervalInHoursEl />
+            <abp-validation-summary [control]="messageIntervalValueHour" [controlEl]="messageIntervalInHoursEl">
+            </abp-validation-summary>
+          </div>
+          <div class="col-md-1"> times</div>
+          <div class="col-md-3">
+            <p-dropdown [options]="times" required placeholder="Select Time"
+              [(ngModel)]="InstaSettingUpdateInputDto.messageInterval" optionLabel="name" name="storyIntervalValue">
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="description">
+            Message
+          </label>
+          <div class="col-md-9">
+            <textarea type="text" class="form-control" name="description" id="description"
+              [(ngModel)]="InstaSettingUpdateInputDto.messageBody" #messageBody="ngModel" #messageBodyEl required>
+          </textarea>
+            <abp-validation-summary [control]="messageBody" [controlEl]="messageBodyEl"></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="recipientTags">
+            Recipient Tag
+          </label>
+          <div class="col-md-9">
+            <textarea type="text" class="form-control" name="recipientTags" id="recipientTags" rows="5"
+              [(ngModel)]="recipientTags" #recipientTagsNg="ngModel" #recipientTagsEl required>
+          </textarea>
+            <abp-validation-summary [control]="recipientTagsNg" [controlEl]="recipientTagsEl"></abp-validation-summary>
+          </div>
+        </div>
+
+
+
+
+      </tab>
+
+    </tabset>
+    <div class="modal-footer justify-content-end" style="margin-top: 50px;">
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="!createRoleForm.form.valid || saving">
+        Save
+      </button>
+    </div>
+  </div>
+</form>
